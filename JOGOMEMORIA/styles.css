@@ -1,0 +1,142 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    height: 100vh;
+    background-color: #f4f4f4;
+    
+}
+
+.header-container {
+    position: fixed; /* Fixa o cabeçalho no topo */
+    top: 0; /* Garante que comece do topo da página */
+    left: 0;
+    width: 100%; /* Ocupa toda a largura */
+    height: 110px;
+    background-color: #00008B; /* Cor de fallback (azul escuro) */
+    background-image: linear-gradient(to right, #00008B, #87CEFA);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-container {
+    position: fixed; /* Fixa o cabeçalho no topo */
+    bottom: 0; /* Garante que comece do topo da página */
+    left: 0;
+    width: 100%; /* Ocupa toda a largura */
+    height: 45px;
+    background-color: #00008B; /* Cor de fallback (azul escuro) */
+    background-image: linear-gradient(to right, #00008B, #87CEFA);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title-text {
+    font-size: 48px; /* Aumentei o tamanho do texto */
+    color: white; /* Texto branco */
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    text-shadow: 8px 8px 5px #000000; /* Sombra mais afastada com leve desfoque */
+}
+
+
+
+
+.text {
+    font-size: 18px;
+    color: white;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    text-shadow: 4px 4px 2px rgba(0, 0, 0, 0.9); /* Menos blur e sombra forte */
+}
+
+.image-box {
+    width: 400px;
+    height: 300px;
+    background-size: cover;
+    border-radius: 15px;
+    box-shadow: 10px 10px 7px #00008B;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Suaviza o efeito */
+}
+
+.image-box img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 15px;
+}
+
+.projetos-imagem{
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.image-box:hover {
+    transform: translateY(-10px); /* Eleva a imagem quando o mouse passa por cima */
+    box-shadow: 15px 15px 10px #00008B; /* Aumenta a sombra para dar a sensação de elevação */
+}
+
+.shadow01 {
+    position: fixed;  /* Fixa a palavra no topo da página */
+    top: 20px;  /* Ajuste a distância do topo conforme necessário */
+    left: 50%;
+    transform: translateX(-50%);  /* Centraliza a palavra horizontalmente */
+    font-size: 35px;
+    color: white;
+    text-shadow: 1px 1px 2px black,   
+                 0 0 25px rgb(255, 89, 0),      
+                 0 0 5px rgb(226, 117, 9);    
+    z-index: 2; /* Garante que o texto fique acima de outros elementos */
+}
+
+
+
+/* Container para as imagens com 4 colunas em cima e 4 embaixo */
+.car-image-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 colunas */
+    grid-gap: 20px;
+    margin: 20px auto;
+    max-width: 1200px; /* Largura máxima */
+}
+
+/* Caixa de imagem */
+.car-image-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid coral; /* Borda coral mais fina */
+    border-radius: 15px; /* Bordas arredondadas */
+    box-shadow: 0 4px 8px rgba(255, 127, 80, 0.5); /* Sombra coral clara externa */
+    overflow: hidden; /* Garante que a imagem não ultrapasse a borda */
+}
+
+/* Ajuste de tamanho das imagens */
+.car-image-box img {
+    width: 100%;
+    max-width: 300px; /* Definindo um tamanho máximo para as imagens */
+    height: auto;
+    border-radius: 15px; /* Bordas arredondadas nas imagens */
+    box-shadow: none; /* Remove a sombra da imagem para evitar duplicidade */
+}
+
+/* Estilo do hover nas caixas de imagem */
+.car-image-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(255, 127, 80, 0.6); /* Sombra coral clara mais forte no hover */
+}
+
+/* Estilo das caixas de fundo coral claro (para as que não têm imagem) */
+.car-image-box.coral-bg {
+    background-color: rgba(255, 127, 80, 0.3); /* Cor de fundo coral claro */
+    box-shadow: 0 4px 8px rgba(255, 127, 80, 0.5); /* Sombra coral clara */
+    height: 200px; /* Garantir que as caixas tenham altura */
+    border: 2px solid coral; /* Borda coral mais fina nas caixas vazias também */
+    border-radius: 15px; /* Bordas arredondadas */
+}
