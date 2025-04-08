@@ -1,33 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Jet Sky</title>
-</head>
-<body>
-    
+    <title>Jogo da Memória - Jet Ski</title>
+    <style>
+        h1 {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 40px;
+            color: white;
+            text-shadow: 1px 1px 2px black, 0 0 25px dodgerblue, 0 0 5px blue;
+            z-index: 10;
+            pointer-events: none;
+        }
 
-    <h1 class="shadow01">PLAY NOW!!!</h1>
+        body {
+            font-family: Arial, sans-serif;
+            background: white;
+            color: #fff;
+            text-align: center;
+            padding: 120px 20px 20px;
+        }
+
+        .car-image-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            perspective: 1000px;
+        }
+
+        .car-image-box {
+            width: 100%;
+            height: 200px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .car-image-box.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front,
+        .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            backface-visibility: hidden;
+            overflow: hidden;
+            border: 2px solid dodgerblue;
+            box-shadow: 0 4px 8px rgba(30, 144, 255, 0.5);
+        }
+
+        .card-front {
+            background-color: rgba(30, 144, 255, 0.3);
+        }
+
+        .card-back {
+            background-color: white;
+            transform: rotateY(180deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-back img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 15px;
+        }
+
+        .car-image-box:hover {
+            transform: translateY(-10px);
+            transition: transform 0.3s;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>PLAY NOW!!!</h1>
 
     <div class="car-image-container">
-        <div class="car-image-box">
-            <img src="https://pngimg.com/uploads/jet_ski/jet_ski_PNG45.png" alt="Carro">
+        <div class="car-image-box" data-card="azul" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-front"></div>
+                <div class="card-back">
+                    <img src="https://pngimg.com/uploads/jet_ski/jet_ski_PNG45.png" alt="Jet Ski">
+                </div>
+            </div>
         </div>
-        <div class="car-image-box coral-bg"></div>
-        <div class="car-image-box">
-            <img src="https://pngimg.com/uploads/jet_ski/jet_ski_PNG66.png" alt="Jet Ski">
+
+        <div class="car-image-box" data-card="azul" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-front"></div>
+                <div class="card-back">
+                    <img src="https://pngimg.com/uploads/jet_ski/jet_ski_PNG45.png" alt="Jet Ski">
+                </div>
+            </div>
         </div>
-        <div class="car-image-box coral-bg"></div>
-        <div class="car-image-box coral-bg"></div>
-        <div class="car-image-box">
-            <img src="https://pngimg.com/uploads/jet_ski/jet_ski_PNG63.png" alt="Carro">
+
+        <div class="car-image-box" data-card="verde" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-front"></div>
+                <div class="card-back">
+                    <img src="https://pngimg.com/uploads/jet_ski/jet_ski_PNG66.png" alt="Jet Ski">
+                </div>
+            </div>
         </div>
-        <div class="car-image-box coral-bg"></div>
-        <div class="car-image-box">
-            <img src="https://pngimg.com/uploads/jet_ski/jet_ski_PNG44.png" alt="Jet Ski">
+
+        <div class="car-image-box" data-card="verde" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-front"></div>
+                <div class="card-back">
+                    <img src="https://pngimg.com/uploads/jet_ski/jet_ski_PNG66.png" alt="Jet Ski">
+                </div>
+            </div>
+        </div>
+
+        <div class="car-image-box" data-card="vermelho" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-front"></div>
+                <div class="card-back">
+                    <img src="https://pngimg.com/uploads/jet_ski/jet_ski_PNG63.png" alt="Jet Ski">
+                </div>
+            </div>
+        </div>
+
+        <div class="car-image-box" data-card="vermelho" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-front"></div>
+                <div class="card-back">
+                    <img src="https://pngimg.com/uploads/jet_ski/jet_ski_PNG63.png" alt="Jet Ski">
+                </div>
+            </div>
+        </div>
+
+        <div class="car-image-box" data-card="preto" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-front"></div>
+                <div class="card-back">
+                    <img src="https://pngimg.com/uploads/jet_ski/jet_ski_PNG44.png" alt="Jet Ski">
+                </div>
+            </div>
+        </div>
+
+        <div class="car-image-box" data-card="preto" onclick="flipCard(this)">
+            <div class="card-inner">
+                <div class="card-front"></div>
+                <div class="card-back">
+                    <img src="https://pngimg.com/uploads/jet_ski/jet_ski_PNG44.png" alt="Jet Ski">
+                </div>
+            </div>
         </div>
     </div>
+
+    <script>
+        let firstCard = null;
+        let secondCard = null;
+        let lockBoard = false;
+
+        function flipCard(card) {
+            if (lockBoard || card === firstCard || card.classList.contains("matched")) return;
+
+            card.classList.add('flipped');
+
+            if (!firstCard) {
+                firstCard = card;
+                return;
+            }
+
+            secondCard = card;
+            checkForMatch();
+        }
+
+        function checkForMatch() {
+            let isMatch = firstCard.dataset.card === secondCard.dataset.card;
+
+            if (isMatch) {
+                firstCard.classList.add("matched");
+                secondCard.classList.add("matched");
+                resetBoard();
+            } else {
+                lockBoard = true;
+                setTimeout(() => {
+                    firstCard.classList.remove('flipped');
+                    secondCard.classList.remove('flipped');
+                    resetBoard();
+                }, 1000);
+            }
+        }
+
+        function resetBoard() {
+            [firstCard, secondCard, lockBoard] = [null, null, false];
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.car-image-container');
+            const cards = Array.from(container.children);
+            const shuffledCards = cards.sort(() => Math.random() - 0.5);
+            shuffledCards.forEach(card => container.appendChild(card));
+        });
+    </script>
 </body>
+
 </html>
