@@ -1,0 +1,85 @@
+h1{
+    
+    font-size: 3.5rem;
+    color: darkblue;
+    font-weight: bold;
+    margin: 20px;
+}
+
+a{
+    text-decoration: none;
+    color: orange;
+    
+}
+
+h3{
+    font-size: 1.5rem;
+    color: darkred;
+    font-weight: bold;
+    margin: 20px;
+}
+
+label{
+    
+    color: darkred;
+    font-weight: bold;
+    margin: 20px;
+}
+
+.imagem{
+    width: 100% ;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.tabela{
+    width: 100%;
+    table-layout: fixed; 
+}
+
+button{
+    background-color: darkblue;
+    color: white;
+    border-radius: 5px;
+    border: 2px solid darkblue;
+    height: 29px;
+    margin: 20px;
+    width: 130px;
+    cursor: pointer;
+}
+
+
+input{
+    margin: 20px;
+    border-radius: red;
+}
+
+svg{
+    margin: 0 80px;
+}
+
+@media screen and (max-width: 1020px) {
+
+    .imagem{
+        display: none;
+    }
+
+    h1{
+        font-size: 2.5rem;
+    }
+
+    svg{
+        width: 35px;
+        height: 40px;
+        margin: 0 10px;
+    }
+    
+}
+

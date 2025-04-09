@@ -1,0 +1,115 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    height: 100vh;
+    background-color: #f4f4f4;
+
+}
+
+h1 {
+    color: darkred;
+    font-size: 25px;
+}
+
+.segundo {
+
+    background-color: rgb(136, 136, 224);
+    color: darkblue;
+
+}
+
+.primeiro {
+    color: darkblue;
+
+}
+
+table,td,th {
+    text-align: center;
+    vertical-align: middle;
+}
+
+table {
+    border-collapse: collapse;
+
+    
+    grid-area: tabela;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: 80px 80px 1fr 40px;
+    grid-template-areas:
+        "item1"
+        "item2"
+        "tabela"
+        "item3";
+    height: 100%;
+    width: 100%;
+}
+
+header {
+    grid-area: item1;
+    background-color: white;
+    border-top: 4px solid darkblue;
+    border-bottom: 4px solid darkblue;
+    border-right: 20px solid darkblue;
+    border-left: 20px solid darkblue;
+    padding: 20px;
+    
+}
+
+main {
+    grid-area: item2;
+    background-color: darkblue;
+    text-align: center;
+    border-top: 1px solid white;
+    padding: 20px;
+    
+}
+
+footer {
+    grid-area: item3;
+    background-color: darkblue;
+    display: flex;
+    justify-content: space-between;  
+    align-items: center;      
+    gap: 1rem;                
+    padding: 1rem;
+}
+
+.title-text {
+    font-size: 40px; 
+    color: white; 
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+}
+
+.imagem{
+    border-radius: 50%;
+    height: 70px; 
+    width: 70px;
+}
+
+@keyframes cores {
+    0%{color: darkblue;left: 0px; top:0px;}
+    25%{color: lightblue;left: 200px; top:0px;}
+    50%{color: darkred;left: 200px; top:200px;}
+    75%{color: darkgoldenrod;left: 0px; top:200px;}
+}
+
+h2 {
+    animation-name: cores;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    font-size: 25px;
+    
+}
+
