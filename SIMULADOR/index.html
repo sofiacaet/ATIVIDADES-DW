@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" 
+    content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Simulador</title>
+</head>
+
+<body>
+    <div class="grid-container">
+        <div class="left">
+            <h1>SIMULADOR</h1>
+            <h2>Flexbox</h2>
+            
+            <h2>Preenchimento</h2>
+            <div>
+                <table>
+                    <tr>
+                        <th class="cor1"></th>
+                        <th class="cor2"></th>
+                        <th class="cor3"></th>
+                    </tr>
+                    <tr>
+                        <th class="cor4"></th>
+                        <th class="cor5"></th>
+                        <th class="cor6"> </th>
+                    </tr>
+                </table>
+            </div>
+            
+            <h2>Formato</h2>
+            <table>
+                <th class="formato1"></th>
+                <th class="formato2"></th>
+            </table>
+            
+            <h2>Tamanho</h2>
+            <input oninput="inputSize()" type="number" value="140" id="size-options" min="100" max="200">
+
+            
+            <h2>Alinhamento</h2>
+            <select id="flex-direction">
+                <option disabled selected>FLEX-DIRECTION</option>
+                <option value="row">ROW</option>
+                <option value="row-reverse">ROW-REVERSE</option>
+                <option value="column">COLUMN</option>
+                <option value="column-reverse">COLUMN-REVERSE</option>
+              </select>
+              
+              <select id="justify-content">
+                <option disabled selected>JUSTIFY-CONTENT</option>
+                <option value="flex-start">FLEX-START</option>
+                <option value="flex-end">FLEX-END</option>
+                <option value="center">CENTER</option>
+                <option value="space-between">SPACE-BETWEEN</option>
+                <option value="space-around">SPACE-AROUND</option>
+                <option value="space-evenly">SPACE-EVENLY</option>
+              </select>
+              
+              <select id="align-items">
+                <option disabled selected>ALIGN-ITEMS</option>
+                <option value="flex-start">FLEX-START</option>
+                <option value="flex-end">FLEX-END</option>
+                <option value="center">CENTER</option>
+                <option value="stretch">STRETCH</option>
+                <option value="baseline">BASELINE</option>
+              </select>
+        </div>   
+    
+
+        <div class="right">
+            <main>
+                <div class="elementos-simulados"><h1>1</h1></div>
+                <div class="elementos-simulados"><h1>2</h1></div>
+                <div class="elementos-simulados"><h1>3</h1></div>
+            </main>
+        </div>
+    </div>
+
+   
+    
+</body>
+<script src="script.js"></script>
+</html>

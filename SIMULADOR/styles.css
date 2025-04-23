@@ -1,0 +1,102 @@
+.cor1 {background-color: rgb(255, 255, 0);}
+.cor2 { background-color: #ff0090;}
+.cor3 { background-color: rgb(119, 0, 255);}
+.cor4 {background-color: rgb(0, 11, 211);}
+.cor5 {background-color: rgb(0, 226, 251);}
+.cor6 {background-color: rgb(9, 233, 151);}
+
+table {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+th {
+  border: 4px solid #4e4e4e;
+  border-color: #4e4e4e;
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+}
+
+.itens-nav {
+  color: #4e4e4e;
+  margin: 1 0;
+  text-align: center;
+}
+
+.elementos-simulados {
+  background-color: pink;
+  width: 150px;
+  height: 150px;
+  text-align: center;
+  margin: 5px;
+  border-radius: 0px;
+  align-content: center;
+  justify-content: center;
+  color: #4e4e4e;
+  border: 4px solid #4e4e4e;
+  border-color: #4e4e4e;
+}
+
+select {
+  background-color: rgba(255, 255, 255, 0.4549019608);
+  color: #000000;
+  border-radius: 5px;
+  border: 2px solid #000000;
+  border-color: #646363;
+  width: 150px;
+  height: 40px;
+  margin: 5px;
+  text-align: center;
+  font-size: 15px;
+}
+
+p {
+  font-size: x-large;
+  color: #646363;
+}
+
+.formato1 {
+  border-radius: 0%;
+  background-color: pink;
+  transition: all 0.3s ease;
+}
+
+.formato2 {
+  border-radius: 100%;
+  background-color: pink;
+  transition: all 0.3s ease;
+}
+
+body {
+  display: flex;
+  margin: 0;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 6fr;
+  height: 100vh;
+}
+
+.left {
+  background-color: rgb(169, 162, 162);
+  padding: 20px;
+}
+
+.right {
+  background-color: white;
+  padding: 20px;
+}
+
+main {
+  display: flex;
+  flex: 8;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  height: 100%;
+}
+
+
