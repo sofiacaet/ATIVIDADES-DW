@@ -1,0 +1,46 @@
+.logo 
+{
+    height: 72px;
+    width: 72px;
+    border-radius: 50%;
+}
+
+.navbar .form-select 
+{
+    width: 10vw;
+    height: 6.3vh
+}
+
+.navbar .dropdown-item:hover 
+{
+    background-color: #747779 !important; 
+}
+
+body 
+{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+nav 
+{
+    border-bottom-left-radius: 10vw;
+    border-bottom-right-radius: 10vw;
+}
+
+#offCanvasRegistro select[multiple] option:nth-child(odd) 
+{
+    background-color: #ffffff;
+}
+
+#offCanvasRegistro select[multiple] option:nth-child(even) 
+{
+    background-color: #b3b7bb;
+}
+
+h3 
+{
+    font-weight: bold;
+}
