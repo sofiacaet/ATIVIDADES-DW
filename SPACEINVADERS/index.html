@@ -1,59 +1,124 @@
 <!DOCTYPE html>
+<!-- Define que o documento está usando a versão HTML5 -->
+
 <html lang="pt-br">
+<!-- Define o idioma principal da página como português do Brasil -->
 
 <head>
     <meta charset="utf-8">
+    <!-- Define a codificação de caracteres como UTF-8, permitindo acentuação e caracteres especiais -->
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap - CDN</title>
+    <!-- Faz a página se adaptar corretamente em diferentes tamanhos de tela (responsividade) -->
+
+    <title>Space Invaders</title>
+    <!-- Define o título da aba do navegador -->
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Importa o framework Bootstrap para facilitar o layout e o estilo da página -->
 
     <!-- Estilo personalizado -->
     <link rel="stylesheet" href="style.css">
+    <!-- Importa seu arquivo CSS próprio com estilos personalizados do jogo -->
 </head>
 
 <body class="m-0 p-0" style="height: 100vh;" onload="startCounter()">
-    
+<!-- Início do corpo da página. Remove margens e preenchimentos padrão e define a altura da página como 100% da tela. Ao carregar a página, chama a função startCounter(). -->
+
     <div class="container-fluid px-0 h-100">
+    <!-- Container que ocupa toda a largura da tela (fluid), sem padding horizontal, e altura de 100% -->
+
         <div class="row g-0 h-50">
+        <!-- Primeira linha da tela, sem espaçamento entre colunas, ocupando 50% da altura -->
+
             <div class="col-2 h-100">
+            <!-- Primeira coluna com 2 partes de 12, ocupando 100% da altura da linha -->
+
                 <div class="col painel-informativo">
+                <!-- Painel informativo com os dados do jogo -->
+
                     <div class="row d-flex align-items-center mb-3">
+                    <!-- Linha com ícone do relógio e contagem de tempo ou pontos -->
+
                         <img class="clock me-2" src="clock.png" alt="">
+                        <!-- Ícone de relógio com margem à direita -->
+
                         <div class="col-4"><h3 id="v">0</h3></div>
+                        <!-- Valor que será atualizado dinamicamente pelo JS (tempo ou pontuação) -->
                     </div>
 
                     <div class="row d-flex align-items-center mb-3">
+                    <!-- Linha com imagem da nave e indicador de vida -->
+
                         <img class="missil me-3" src="nave.png" alt="">
+                        <!-- Ícone da nave com margem à direita -->
+
                         <div class="col-4"><h3>LIFE:3</h3></div>
+                        <!-- Vida atual do jogador (pode ser atualizada via JavaScript depois) -->
                     </div>
 
                     <div class="row d-flex align-items-center ">
+                    <!-- Linha com imagem do alien e a pontuação atual -->
+
                         <img class="missil" style="max-width: 75px;" src="alien.png" alt="">
-                        <div class="col-4"><h3>ALIEN:0</h3></div>
+                        <!-- Ícone do alien com largura máxima de 75px -->
+
+                        <div class="col-4">
+                            <h3>ALIEN:<span id="pontuacao">0</span></h3>
+                            <!-- Pontuação relacionada aos aliens, será atualizada com JavaScript -->
+                        </div>
                     </div>
-                </div>
+
+                </div> <!-- Fim do painel informativo -->
             </div>
+
             <div class="col-10 text-white">
+            <!-- Segunda coluna da primeira linha (parte principal do jogo), com texto branco -->
+
+                <div id="alien-container" class="position-relative w-100 h-100"></div>
+                <!-- Área onde os aliens aparecerão e se movimentarão. A posição relativa permite posicionar os aliens com 'absolute' dentro dela -->
             </div>
         </div>
+
         <div class="row g-0 h-50">
+        <!-- Segunda linha da tela, sem espaçamento entre colunas, também com 50% da altura -->
+
             <div class="col d-flex text-center align-items-end justify-content-center">
+            <!-- Coluna centralizada, com alinhamento dos itens ao fundo da área, ideal para posicionar a nave -->
+
                 <div class="naveContainer">
-                    <!-- <img  class="missel img-fluid" src="missil.png" alt="missel-top" style="transition: transform 0.2s ease;" id="missil1"> -->
-                    <img class="nave img-fluid" src="nave.png" alt="nave-top" style="transition: transform 0.2s ease;">
-                    <!-- <img class="missel img-fluid" src="missil.png" alt="missel-top" style="transition: transform 0.2s ease;" id="missil2"> -->
+                <!-- Container que agrupa a nave e os mísseis -->
+
+                    <img class="missel img-fluid" src="missil.png" alt="missel-top"
+                         style="transition: transform 0.2s ease;" id="missil1">
+                    <!-- Imagem do primeiro míssil (lado esquerdo da nave), com transição suave ao mover -->
+
+                    <img class="nave img-fluid" src="nave.png" alt="nave-top"
+                         style="transition: transform 0.2s ease;">
+                    <!-- Imagem da nave central com efeito de transição -->
+
+                    <img class="missel img-fluid" src="missil.png" alt="missel-top"
+                         style="transition: transform 0.2s ease;" id="missil2">
+                    <!-- Imagem do segundo míssil (lado direito da nave) -->
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="pause-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); color: white; z-index: 9999; justify-content: center; align-items: center; text-align: center;">
+    <div id="pause-overlay"
+         style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+         background: rgba(0, 0, 0, 0.8); color: white; z-index: 9999;
+         justify-content: center; align-items: center; text-align: center;">
+        <!-- Tela de pausa, cobre toda a tela quando exibida. Inicialmente escondida. 
+             Pode ser ativada com JavaScript durante a pausa do jogo. -->
+
         <h1>Pause</h1>
+        <!-- Texto exibido durante a pausa -->
     </div>
 
     <script src="script.js"></script>
+    <!-- Importa o script JavaScript onde está a lógica do jogo (movimento, colisão, pontuação, etc) -->
 </body>
 </html>
