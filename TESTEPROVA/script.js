@@ -8,6 +8,11 @@ let faseAtual = 1;
 let intervaloAliens; 
 let velocidadeAliens = 400; 
 let pontuacaoInicialDaRodada = 0;
+let podeAtirar = true;
+let misseisAtivos = 0;
+const maxMisseis = 2;
+const tempoEntreDisparos = 300; // ms entre cada disparo
+
 
 function add() {
     val++; 
@@ -82,6 +87,13 @@ function gameOver() {
     pauseOverlay.style.display = "flex";
     isPaused = true;
     stopCounter(); 
+    clearInterval(intervaloAliens); 
+
+    
+    pontuacao = Math.max(0, pontuacao);  
+
+    
+    document.getElementById("pontuacao").textContent = pontuacao;
 }
 
 function youLoose() {
@@ -90,40 +102,93 @@ function youLoose() {
     isPaused = true;
     stopCounter(); 
 
+    
     setTimeout(() => {
         pauseOverlay.style.display = "none";
         isPaused = false;
         startCounter(); 
+
+        
+        if (vidas > 0) {
+            
+            reiniciarAliens();
+            pontuacao = Math.max(0, pontuacao);  
+        }
     }, 2000);
 }
 
+
 function atirar(tecla) {
-    if (isPaused) return; 
-    const naveRect = nave.getBoundingClientRect(); 
-    const naveCenter = naveRect.left + naveRect.width / 2; 
-    const deslocamento = 30; 
-    let missil; 
-    if (tecla === "a") {
-        missil = document.getElementById("missil1"); 
-    } else if (tecla === "d") {
-        missil = document.getElementById("missil2"); 
-    }
-    if (!missil) return; 
-    missil.style.left = `${naveCenter + (tecla === "a" ? -deslocamento : deslocamento) - missil.offsetWidth / 2}px`; 
-    missil.style.transition = "none"; 
-    missil.style.transform = "translateY(0)"; 
-    missil.style.opacity = "1"; 
-    void missil.offsetWidth; 
-    missil.style.transition = "transform 0.4s linear, opacity 0.2s ease-out"; 
-    missil.style.transform = "translateY(-600px)"; 
-    const intervaloColisao = setInterval(() => {
-        detectarColisao(missil); 
-    }, 50);
-    setTimeout(() => {
-        missil.style.opacity = "0"; 
-        clearInterval(intervaloColisao); 
-    }, 400); 
+    if (vidas === 0) return;
+    if (!podeAtirar || misseisAtivos >= maxMisseis || isPaused) return;
+
+    podeAtirar = false;
+    setTimeout(() => { podeAtirar = true; }, tempoEntreDisparos);
+    misseisAtivos++;
+
+    const missil = document.createElement("div");
+    missil.classList.add("missil");
+    missil.innerHTML = `<img src="missil.png" style="width:20px;">`;
+
+    const naveRect = nave.getBoundingClientRect();
+    const gameArea = document.body; 
+    const gameRect = gameArea.getBoundingClientRect();
+
+    const deslocamento = 30;
+    const posX = naveRect.left - gameRect.left + nave.offsetWidth / 2 +
+                 (tecla === "a" ? -deslocamento : deslocamento) - 10;
+
+    missil.style.position = "absolute";
+    missil.style.left = `${posX}px`;
+    missil.style.bottom = "10%";
+    missil.style.zIndex = "10";
+
+    gameArea.appendChild(missil);
+
+    let posPercent = 10; 
+    let missilSaiuOuAcertou = false;
+
+    const anim = setInterval(() => {
+        posPercent += 2;
+        missil.style.bottom = posPercent + "%";
+
+        const missilRect = missil.getBoundingClientRect();
+        document.querySelectorAll('.alien').forEach(alien => {
+            const alienRect = alien.getBoundingClientRect();
+            const colidiu =
+                missilRect.left < alienRect.right &&
+                missilRect.right > alienRect.left &&
+                missilRect.top < alienRect.bottom &&
+                missilRect.bottom > alienRect.top;
+
+            if (colidiu) {
+                alien.remove();
+                missil.remove();
+                clearInterval(anim);
+
+                if (!missilSaiuOuAcertou) {
+                    misseisAtivos--;
+                    missilSaiuOuAcertou = true;
+                }
+
+                pontuacao++;
+                document.getElementById("pontuacao").textContent = pontuacao;
+
+                if ([3, 6, 9].includes(pontuacao)) proximaFase();
+                if (pontuacao === 12) youWin();
+            }
+        });
+
+        if (posPercent >= 100 && !missilSaiuOuAcertou) {
+            missil.remove();
+            clearInterval(anim);
+            misseisAtivos--;
+            missilSaiuOuAcertou = true;
+        }
+    }, 27.5);
 }
+
+
 
 document.addEventListener("keydown", (event) => {
     if (event.key.toLowerCase() === "a") {
@@ -183,31 +248,40 @@ function detectarColisao(missil) {
 }
 
 function moverAliensParaBaixo() {
-    if (isPaused) return; 
+    if (isPaused || vidas === 0) return; 
+    
     const aliens = document.querySelectorAll(".alien"); 
     const naveRect = nave.getBoundingClientRect(); 
+    
     aliens.forEach((alien) => {
         const topAtual = parseFloat(alien.style.top) || 0; 
         const novoTop = topAtual + 5; 
         alien.style.top = `${novoTop}px`; 
+        
         const alienRect = alien.getBoundingClientRect(); 
         const colidiu = alienRect.bottom >= naveRect.top;
 
-            if (colidiu) {
-                vidas--;
-                youLoose();
-                pontuacao = pontuacaoInicialDaRodada;
-                document.getElementById("pontuacao").textContent = pontuacao;
-                atualizarPlacarDeVidas();
-                if (vidas === 0) {
-                    gameOver();
-                } else {
-                    reiniciarAliens(); 
-                    pontuacaoInicialDaRodada = pontuacao; 
+        if (colidiu) {
+            vidas--;  
+        
+            atualizarPlacarDeVidas(); 
+        
+            if (vidas === 0) {
+                gameOver();  
+            } else {
+               
+                if (vidas > 0) {
+                    youLoose();  
+                    pontuacao = pontuacaoInicialDaRodada;
+                    document.getElementById("pontuacao").textContent = pontuacao;
+                    reiniciarAliens();
+                    pontuacaoInicialDaRodada = pontuacao;
                 }
             }
+        }
     });
 }
+
 
 function atualizarPlacarDeVidas() {
     document.getElementById("life").textContent = `LIFE:${vidas}`; 
