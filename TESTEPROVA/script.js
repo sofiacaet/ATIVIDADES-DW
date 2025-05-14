@@ -248,7 +248,7 @@ function detectarColisao(missil) {
 }
 
 function moverAliensParaBaixo() {
-    if (isPaused || vidas === 0) return; 
+    if (isPaused || vidas <= 0) return;  // Verifica se o jogo está pausado ou se as vidas acabaram
     
     const aliens = document.querySelectorAll(".alien"); 
     const naveRect = nave.getBoundingClientRect(); 
@@ -262,17 +262,19 @@ function moverAliensParaBaixo() {
         const colidiu = alienRect.bottom >= naveRect.top;
 
         if (colidiu) {
-            vidas--;  
-        
-            atualizarPlacarDeVidas(); 
-        
+            vidas--;  // Diminui a vida ao colidir com o alien
+
+            // Atualiza o placar de vidas apenas se ainda houver vidas
+            if (vidas >= 0) {
+                atualizarPlacarDeVidas();
+            }
+
             if (vidas === 0) {
-                gameOver();  
+                gameOver();  // Chama game over quando vidas chegam a 0
             } else {
-               
                 if (vidas > 0) {
-                    youLoose();  
-                    pontuacao = pontuacaoInicialDaRodada;
+                    youLoose();  // Exibe a tela de "You Lose" quando o jogador perde
+                    pontuacao = pontuacaoInicialDaRodada;  // Reseta a pontuação
                     document.getElementById("pontuacao").textContent = pontuacao;
                     reiniciarAliens();
                     pontuacaoInicialDaRodada = pontuacao;
